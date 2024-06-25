@@ -1,0 +1,7 @@
+{
+  "name": "rook_demo_ionic_app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
