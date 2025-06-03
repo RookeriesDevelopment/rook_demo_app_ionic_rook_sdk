@@ -18,6 +18,7 @@ import { useHistory } from 'react-router-dom';
 const User: React.FC = () => {
 
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [isUserIdAdded, setIsUserAdded] = useState(false);
   const [title, setTitle] = useState(String);
   const [message, setMessage] = useState(String);
@@ -26,10 +27,13 @@ const User: React.FC = () => {
   const history = useHistory();
 
   useEffect(() => {
+    setIsLoading(true);
     RookConfig.initRook({
       environment: 'sandbox',
-      clientUUID: 'YOUR-CLIENT-UUIF',
+      clientUUID: 'YOUR-CLIENT-UUID',
       password: 'YOUR-PASSWORD',
+      enableBackgroundSync: false,
+      enableEventsBackgroundSync: false
     })
       .then(() => {
         console.log('Initialized')
@@ -37,10 +41,18 @@ const User: React.FC = () => {
         if (userResult.userId.length > 0) {
           history.push('/home');
         }
+        setIsLoading(false);
         })
-        .catch((e: any) => console.log('error get user id', e));
+        .catch((e: any) => {
+          setIsLoading(false);
+          console.log('error get user id', e);
+        });
       })
-      .catch((e: any) => console.log('error init rook sdk', e));
+      .catch((e: any) => {
+        setIsLoading(false);
+        console.log('error init rook sdk', e)
+      }
+    );
   }, []);
 
   const handleUpdateUserId = async (): Promise<void> => {
@@ -99,7 +111,7 @@ const User: React.FC = () => {
           <IonTitle size="large">Blank</IonTitle>
         </IonToolbar>
       </IonHeader>
-
+      { !isLoading && (
       <IonList>
         <IonItem>
           <IonInput
@@ -114,8 +126,13 @@ const User: React.FC = () => {
         <IonItem>
           <IonButton onClick={handleUpdateUserId}>Add user id</IonButton>
         </IonItem>
-
       </IonList>
+      )}
+      { isLoading && (
+        <IonItem>
+          <IonTitle>Loading ...</IonTitle>
+        </IonItem>
+      )}
       <IonAlert
         isOpen={isOpen}
         header={title}

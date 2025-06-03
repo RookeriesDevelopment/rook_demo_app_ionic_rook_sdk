@@ -12,6 +12,7 @@ import {
   IonItem,
   IonDatetime,
   DatetimeChangeEventDetail,
+  isPlatform,
 } from '@ionic/react';
 import './Home.css';
 import {
@@ -26,6 +27,8 @@ const BackGround: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState(String);
   const [message, setMessage] = useState(String);
+  const isIOS = isPlatform('ios');
+  const isAndroid = isPlatform('android');
 
   const history = useHistory();
 
@@ -35,9 +38,16 @@ const BackGround: React.FC = () => {
 
   const handleEnableBackGround = async (): Promise<void> => {
     try {
-      const result = await RookAppleHealth.enableBackGroundUpdates();
-      setTitle('Background');
-      setMessage(`background enable ${result.result}`);
+      if (isPlatform('ios')) {
+        const result = await RookAppleHealth.enableBackGroundUpdates();
+        setTitle('Background');
+        setMessage(`background enable ${result.result}`);
+      }
+      if (isPlatform('android')) {
+        const result = await RookHealthConnect.scheduleHealthConnectBackGround();
+        setTitle('Background');
+        setMessage(`background enable ${result.result}`);
+      } 
     } catch (error) {
       setTitle('Background');
       setMessage(`error while enable background ${error}`);
@@ -48,8 +58,16 @@ const BackGround: React.FC = () => {
   const handleDisableBackGround = async (): Promise<void> => {
     try {
       const result = await RookAppleHealth.disableBackGroundUpdates();
-      setTitle('Background');
-      setMessage(`background disable ${result.result}`);
+      if (isPlatform('ios')) {
+        const result = await RookAppleHealth.disableBackGroundUpdates();
+        setTitle('Background');
+        setMessage(`background disable ${result.result}`);
+      }
+      if (isPlatform('android')) {
+        const result = await RookHealthConnect.cancelHealthConnectBackGround();
+        setTitle('Background');
+        setMessage(`background enable ${result.result}`);
+      } 
     } catch (error) {
       setTitle('Background');
       setMessage(`error while disable background ${error}`);
@@ -158,58 +176,65 @@ const BackGround: React.FC = () => {
         <IonList>
           <IonItem>
             <IonButton onClick={handleEnableBackGround}>
-              Enable back ground sync apple
+              Enable back ground { isIOS ? `Apple Health` : `Health Connect` }
             </IonButton>
           </IonItem>
-
+          
           <IonItem>
             <IonButton onClick={handleDisableBackGround}>
-              Disable back ground sync apple
+              Disable back ground sync { isIOS ? `Apple Health` : `Health Connect` }
             </IonButton>
           </IonItem>
 
+          { isIOS && (
           <IonItem>
             <IonButton onClick={handleEnableAppleHealthSync}>
               Enable sync apple
             </IonButton>
-          </IonItem>
+          </IonItem> )}
 
+          { isIOS && (
           <IonItem>
             <IonButton onClick={handleDisableAppleHealthSync}>
               Disable sync apple
             </IonButton>
-          </IonItem>
-        </IonList>
+          </IonItem> )}
+        </IonList> 
 
+        { isAndroid && (
         <IonItem>
             <IonButton onClick={handleScheduleYesterdaySync}>
               Start ScheduleYesterdaySync android
             </IonButton>
-          </IonItem>
+          </IonItem> )}
 
+          { isAndroid && (
           <IonItem>
             <IonButton onClick={handleEnableSteps}>
               Enable background steps android
             </IonButton>
-          </IonItem>
+          </IonItem>)}
 
+          { isAndroid && (
           <IonItem>
             <IonButton onClick={handleDisableSteps}>
               Disable background steps android
             </IonButton>
-          </IonItem>
+          </IonItem> )}
 
+          { isAndroid && (
           <IonItem>
             <IonButton onClick={handleIsStepsEnable}>
               is background steps android
             </IonButton>
-          </IonItem>
+          </IonItem> )}
 
+          { isAndroid && (
           <IonItem>
             <IonButton onClick={handleSyncStepsAndroid}>
               Sync android system steps
             </IonButton>
-          </IonItem>
+          </IonItem> )}
 
         <IonAlert
           isOpen={isOpen}
