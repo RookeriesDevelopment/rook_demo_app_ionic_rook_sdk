@@ -62,6 +62,21 @@ const Home: React.FC = () => {
     }
   };
 
+  const goToDataSourcesView = async () => {
+    try {
+      const result = await RookConfig.getUserId();
+      console.log('result user id', result.userId);
+      if (result.userId.length > 0) {
+        history.push('/datasourcespage');
+      }
+    } catch (error) {
+      setMessage('fisrt add a user');
+      setTitle('Empty User');
+      setIsOpen(true);
+      console.log('error', error);
+    }
+  };
+
   const goToBackgroundsView = async () => {
     try {
       const result = await RookConfig.getUserId();
@@ -138,6 +153,10 @@ const Home: React.FC = () => {
 
           <IonItem>
             <IonButton onClick={goToEventsView}>Go To Events</IonButton>
+          </IonItem>
+
+          <IonItem>
+            <IonButton onClick={goToDataSourcesView}>Go To Data Sources</IonButton>
           </IonItem>
 
           <IonItem>

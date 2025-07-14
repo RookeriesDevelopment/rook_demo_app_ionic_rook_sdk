@@ -3,21 +3,24 @@ PODS:
     - CapacitorCordova
   - CapacitorApp (7.0.1):
     - Capacitor
+  - CapacitorBrowser (7.0.1):
+    - Capacitor
   - CapacitorCordova (7.2.0)
   - CapacitorHaptics (7.0.1):
     - Capacitor
   - CapacitorKeyboard (7.0.1):
     - Capacitor
-  - CapacitorRookSdk (0.4.8):
+  - CapacitorRookSdk (0.4.9):
     - Capacitor
-    - RookSDK (= 1.7.5-rc.2)
+    - RookSDK (= 1.7.5-rc.5)
   - CapacitorStatusBar (7.0.1):
     - Capacitor
-  - RookSDK (1.7.5-rc.2)
+  - RookSDK (1.7.5-rc.5)
 
 DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorApp (from `../../node_modules/@capacitor/app`)"
+  - "CapacitorBrowser (from `../../node_modules/@capacitor/browser`)"
   - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorHaptics (from `../../node_modules/@capacitor/haptics`)"
   - "CapacitorKeyboard (from `../../node_modules/@capacitor/keyboard`)"
@@ -33,6 +36,8 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/ios"
   CapacitorApp:
     :path: "../../node_modules/@capacitor/app"
+  CapacitorBrowser:
+    :path: "../../node_modules/@capacitor/browser"
   CapacitorCordova:
     :path: "../../node_modules/@capacitor/ios"
   CapacitorHaptics:
@@ -47,13 +52,14 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Capacitor: 106e7a4205f4618d582b886a975657c61179138d
   CapacitorApp: d63334c052278caf5d81585d80b21905c6f93f39
+  CapacitorBrowser: 081852cf532acf77b9d2953f3a88fe5b9711fb06
   CapacitorCordova: 5967b9ba03915ef1d585469d6e31f31dc49be96f
   CapacitorHaptics: 70e47470fa1a6bd6338cd102552e3846b7f9a1b3
   CapacitorKeyboard: 969647d0ca2e5c737d7300088e2517aa832434e2
-  CapacitorRookSdk: 344f7cfce14d9b60a45eea4ca41a5c890e21428d
+  CapacitorRookSdk: a5f44408964ead6f8ec83e9b186c99b4b26c5e53
   CapacitorStatusBar: 275cbf2f4dfc00388f519ef80c7ec22edda342c9
-  RookSDK: 32a7c3c264d265e34c59e67a468f8d16c615abdd
+  RookSDK: 90c90125db03f9080c0c3a04240099c2db792dbe
 
-PODFILE CHECKSUM: 5ece76d2485e29f342457361fd223bd4d8f245a4
+PODFILE CHECKSUM: 2130852bc6634bc62b8007e0e880a33a25cd28dd
 
 COCOAPODS: 1.16.2

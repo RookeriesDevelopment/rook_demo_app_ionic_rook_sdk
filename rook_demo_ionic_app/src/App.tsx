@@ -37,6 +37,7 @@ import Summaries from './pages/Summaries';
 import BackGround from './pages/BackGround';
 import Events from './pages/Events';
 import User from './pages/User';
+import DataSourcesPage from './pages/DataSources';
 
 setupIonicReact();
 
@@ -55,6 +56,7 @@ const App: React.FC = () => (
         <Route exact path="/summary" component={Summaries} />
         <Route exact path="/events" component={Events} />
         <Route exact path="/background" component={BackGround} />
+        <Route exact path="/datasourcespage" component={DataSourcesPage} />
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
